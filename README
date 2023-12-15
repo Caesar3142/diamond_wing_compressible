@@ -1,2 +1,2 @@
 //This is an openfoam template to simulate compressible flow for diamond wing with "fluid" solver and block mesh griding
-//lates update, Dec 13 2023, the solver still divergent due to a built up pressure on the leading edge
+//lates update, Dec 15 2023, successfully tested with mach 2
