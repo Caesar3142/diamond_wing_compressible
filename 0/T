@@ -13,23 +13,20 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+Tinlet          298;
+
 dimensions      [0 0 0 1 0 0 0];
 
-internalField   uniform 300;
+internalField   uniform $Tinlet;
 
 boundaryField
 {
-    inlet
+    freestream
     {
-        type            fixedValue;
-        value           $internalField;
+        type            inletOutlet;
+        inletValue      uniform $Tinlet;
+        value           $inletValue;
     }
-
-    outlet
-    {
-        type            zeroGradient;
-    }
-
 
     airfoil
     {
@@ -42,5 +39,5 @@ boundaryField
     }
 }
 
-//***************************caesar_wiratama_2023*****************************//
+// ***************************caesar_wiratama_2023************************** //
 // ************************************************************************* //

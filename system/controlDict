@@ -9,7 +9,6 @@ FoamFile
 {
     format      ascii;
     class       dictionary;
-    location    "system";
     object      controlDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -18,7 +17,7 @@ application     foamRun;
 
 solver          fluid;
 
-startFrom       startTime;
+startFrom       latestTime;
 
 startTime       0;
 
@@ -26,17 +25,17 @@ stopAt          endTime;
 
 endTime         0.1;
 
-deltaT          1e-6;
+deltaT          2e-5;
 
-writeControl    runTime;
+writeControl    adjustableRunTime;
 
-writeInterval   0.0001;
+writeInterval   0.00025;
 
 purgeWrite      0;
 
 writeFormat     ascii;
 
-writePrecision  6;
+writePrecision   8;
 
 writeCompression off;
 
@@ -48,8 +47,9 @@ runTimeModifiable true;
 
 functions
 {
-    #includeFunc mag(U)
+    #includeFunc MachNo
+    #includeFunc residuals
 }
 
-//***************************caesar_wiratama_2023****************************//
+// ***************************caesar_wiratama_2023************************** //
 // ************************************************************************* //

@@ -8,35 +8,13 @@
 FoamFile
 {
     format      ascii;
-    class       volScalarField;
-    object      p;
+    class       dictionary;
+    object      fvConstraints;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-pOut            1e5;
-
-dimensions      [1 -1 -2 0 0 0 0];
-
-internalField   uniform $pOut;
-
-boundaryField
-{
-    freestream
-    {
-        type            freestreamPressure;
-        freestreamValue uniform $pOut;
-    }
-
-    airfoil
-    {
-        type            zeroGradient;
-    }
-
-        frontAndBack
-    {
-        type            empty;
-    }
-}
+#includeConstraint limitPressure(minFactor=0.1, maxFactor=2)
+#includeConstraint limitTemperature(min=101, max=1000)
 
 // ***************************caesar_wiratama_2023************************** //
-// ************************************************************************* //
+//************************************************************************** //

@@ -28,11 +28,11 @@ minsinC #calc "-$C*sin(degToRad($a))";
 mincost #calc "-$t*cos(degToRad($a))";
 minsint #calc "-$t*sin(degToRad($a))";
 
-plusY 3;
-minY -3;
+plusY 10;
+minY -10;
 
-plusX 5;
-minX -2;
+plusX 25;
+minX -10;
 
 vertices
 (
@@ -71,22 +71,22 @@ vertices
     ($sint $cost 0.02) //15
 );
 
-c 10; //half chord mesh
-y #calc "6.5 * $c";
+c 15; //half chord mesh
+y #calc "8 * $c";
 x1 #calc "2 * $c";
-x2 #calc "4.5 * $c";
+x2 #calc "6 * $c";
 
 
 blocks
 (
-    hex (0 1 8 9 16 17 24 25) ($x1 $y 1) simpleGrading (0.5 0.25 1) //1
-    hex (1 2 7 8 17 18 23 24) ($c $y 1) simpleGrading (1 0.25 1) //2
-    hex (2 3 6 7 18 19 22 23) ($c $y 1) simpleGrading (1 0.25 1) //3
-    hex (3 4 5 6 19 20 21 22) ($x2 $y 1) simpleGrading (3 0.25 1) //4
-    hex (6 5 14 13 22 21 30 29) ($x2 $y 1) simpleGrading (3 4 1) //5
-    hex (15 6 13 12 31 22 29 28) ($c $y 1) simpleGrading (1 4 1) //6
-    hex (8 15 12 11 24 31 28 27) ($c $y 1) simpleGrading (1 4 1) //7
-    hex (9 8 11 10 25 24 27 26) ($x1 $y 1) simpleGrading (0.5 4 1) //8
+    hex (0 1 8 9 16 17 24 25) ($x1 $y 1) simpleGrading (0.04 0.0125 1) //1
+    hex (1 2 7 8 17 18 23 24) ($c $y 1) simpleGrading (1 0.0125 1) //2
+    hex (2 3 6 7 18 19 22 23) ($c $y 1) simpleGrading (1 0.0125 1) //3
+    hex (3 4 5 6 19 20 21 22) ($x2 $y 1) simpleGrading (30 0.0125 1) //4
+    hex (6 5 14 13 22 21 30 29) ($x2 $y 1) simpleGrading (30 80 1) //5
+    hex (15 6 13 12 31 22 29 28) ($c $y 1) simpleGrading (1 80 1) //6
+    hex (8 15 12 11 24 31 28 27) ($c $y 1) simpleGrading (1 80 1) //7
+    hex (9 8 11 10 25 24 27 26) ($x1 $y 1) simpleGrading (0.04 80 1) //8
 );
 
 boundary
@@ -102,7 +102,7 @@ boundary
             (7 6 22 23)
         );
     }
-    inlet
+    freestream
     {
         type patch;
         faces
@@ -115,16 +115,10 @@ boundary
             (3 4 20 19)
             (10 11 27 26)
             (11 12 28 27)
+	    (12 13 29 28)
             (13 14 30 29)
-        );
-    }
-    outlet
-    {
-        type patch;
-        faces
-        (
-            (14 5 21 30)
-            (4 5 21 20)
+	    (14 5 21 30)
+	    (4 5 21 20)
         );
     }
 
@@ -154,5 +148,5 @@ boundary
     }
 );
 
-//***************************caesar_wiratama_2023****************************//
+// ***************************caesar_wiratama_2023************************** //
 // ************************************************************************* //

@@ -9,30 +9,32 @@ FoamFile
 {
     format      ascii;
     class       volScalarField;
-    object      p;
+    object      omega;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-pOut            1e5;
+omegaInlet      1;
 
-dimensions      [1 -1 -2 0 0 0 0];
+dimensions      [0 0 -1 0 0 0 0];
 
-internalField   uniform $pOut;
+internalField   uniform $omegaInlet;
 
 boundaryField
 {
     freestream
     {
-        type            freestreamPressure;
-        freestreamValue uniform $pOut;
+        type            inletOutlet;
+        inletValue      uniform $omegaInlet;
+        value           uniform $omegaInlet;
     }
 
     airfoil
     {
-        type            zeroGradient;
+        type            omegaWallFunction;
+        value           uniform $omegaInlet;
     }
 
-        frontAndBack
+    frontAndBack
     {
         type            empty;
     }

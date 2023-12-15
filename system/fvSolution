@@ -9,38 +9,67 @@ FoamFile
 {
     format      ascii;
     class       dictionary;
-    location    "system";
     object      fvSolution;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 solvers
 {
-    "(p|U|e).*"
+    p
     {
-        solver          smoothSolver;
-        smoother        symGaussSeidel;
-        tolerance       1e-15;
+        solver          GAMG;
+        smoother        GaussSeidel;
+        tolerance       1e-6;
+        relTol          0.01;
+    }
+
+    pFinal
+    {
+        $p;
         relTol          0;
     }
 
-    "rho.*"
+    "(rho|U|k|omega|e)"
     {
-        solver          PCG;
-        preconditioner  DIC;
-        tolerance       1e-15;
+        solver          PBiCGStab;
+        preconditioner  DILU;
+        tolerance       1e-6;
+        relTol          0.1;
+    }
+
+    "(rho|U|k|omega|e)Final"
+    {
+        $U;
         relTol          0;
     }
+}
+
+SIMPLE
+{
+    residualControl
+    {
+        p               1e-4;
+        U               1e-4;
+        "(k|omega|e)"   1e-4;
+    }
+
+    nNonOrthogonalCorrectors 0;
 }
 
 PIMPLE
 {
-    nOuterCorrectors     2;
-    nCorrectors          1;
-    nNonOrthogonalCorrectors 0;
-
-    transonic            yes;
+    nCorrectors              2;
+    nNonOrthogonalCorrectors 1;
+    nOuterCorrectors         1;
 }
 
-//***************************caesar_wiratama_2023****************************//
+relaxationFactors
+{
+    equations
+    {
+        ".*"     1;
+    }
+}
+
+// ***************************caesar_wiratama_2023************************** //
 // ************************************************************************* //

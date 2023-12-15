@@ -9,34 +9,33 @@ FoamFile
 {
     format      ascii;
     class       volScalarField;
-    object      p;
+    object      alphat;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-pOut            1e5;
+dimensions      [1 -1 -1 0 0 0 0];
 
-dimensions      [1 -1 -2 0 0 0 0];
-
-internalField   uniform $pOut;
+internalField   uniform 0;
 
 boundaryField
 {
     freestream
     {
-        type            freestreamPressure;
-        freestreamValue uniform $pOut;
+        type            calculated;
+        value           uniform 0;
     }
 
     airfoil
     {
-        type            zeroGradient;
+        type            compressible::alphatWallFunction;
+        value           uniform 0;
     }
 
-        frontAndBack
+    frontAndBack
     {
         type            empty;
     }
 }
 
-// ***************************caesar_wiratama_2023************************** //
+// ************************caesar_wiratama_2023***************************** //
 // ************************************************************************* //

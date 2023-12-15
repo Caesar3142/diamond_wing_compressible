@@ -19,22 +19,16 @@ internalField   uniform (680 0 0);
 
 boundaryField
 {
-    inlet
+    freestream
     {
         type            freestreamVelocity;
-        freestreamValue      $internalField;
-    }
-
-    outlet
-    {
-        type            inletOutlet;
-	inletValue	$internalField;
-	value		$internalField;
+        freestreamValue $internalField;
+        value           $internalField;
     }
 
     airfoil
     {
-        type            slip;
+        type            noSlip;
     }
 
     frontAndBack
@@ -43,5 +37,5 @@ boundaryField
     }
 }
 
-//***************************caesar_wiratama_2023*****************************//
+// ***************************caesar_wiratama_2023************************** //
 // ************************************************************************* //

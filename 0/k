@@ -9,34 +9,35 @@ FoamFile
 {
     format      ascii;
     class       volScalarField;
-    object      p;
+    object      k;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-pOut            1e5;
+kInlet          1e-3;
 
-dimensions      [1 -1 -2 0 0 0 0];
+dimensions      [0 2 -2 0 0 0 0];
 
-internalField   uniform $pOut;
+internalField   uniform $kInlet;
 
 boundaryField
 {
     freestream
     {
-        type            freestreamPressure;
-        freestreamValue uniform $pOut;
+        type            inletOutlet;
+        inletValue      uniform $kInlet;
+        value           uniform $kInlet;
     }
 
     airfoil
     {
-        type            zeroGradient;
+        type            kqRWallFunction;
+        value           uniform $kInlet;
     }
 
-        frontAndBack
+    frontAndBack
     {
         type            empty;
     }
 }
 
-// ***************************caesar_wiratama_2023************************** //
 // ************************************************************************* //
